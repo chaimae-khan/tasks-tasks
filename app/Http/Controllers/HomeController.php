@@ -11,6 +11,7 @@ use App\Models\Rapport;
 use Illuminate\Http\Request;
 use App\Models\EmployeeTask ;
 use App\Models\Projectt;
+use App\Models\Report;
 use App\Notifications\NewTaskNotification;
 /* use Illuminate\Notifications\Notification; */
 use Illuminate\Support\Facades\Notification;
@@ -45,28 +46,34 @@ class HomeController extends Controller
         ->join('projectts','projectts.id','=','tasks.projct_id')
         ->select('tasks.*','employees.name','employee_task.assigned_date','projectts.Descrption')
         ->where('tasks.operation','=','dis')
+        ->whereNotIn('tasks.id',function($query){
+            $query->select('task_id')->from('reports');})
         ->get();
+       
+  
+
         // $tasks = DB::table('tasks')
+        // ->join('projectts','projectts.id','=','tasks.projct_id')
         // ->join('employee_task','employee_task.task_id','=','tasks.id')
         // ->join('employees','employees.id','=','employee_task.employee_id')
-        // ->join('projectts','projectts.id','=','tasks.projct_id')
-        // ->select('tasks.*','employees.name','employee_task.assigned_date','projectts.Descrption')
         // ->where('tasks.operation','=','dis')
-        // ->whereNotIn('tasks.id', function ($query) {
-        //     $query->select('task_id')->from('rapport');
-        // })
-        // ->get();
-
+        // ->whereNotIn('tasks.id',function($query){
+        //         $query->select('task_id')->from('reports');
+        // })->get();
+        
+        
 
         $emp = Employee::all();
         $project= Projectt::all();
         $statutTask = ['Open','Delivred','To Do','To Test','Colosed','Cancled'];
-      
+        $PriorityTask = ['low ','not critical','normal','uregent'];
+
         return view('admin')
         ->with('tasks',$tasks)
         ->with('emp',$emp)
         ->with('project',$project)
         ->with('statutTask',$statutTask)
+        ->with('PriorityTask',$PriorityTask)
         ->with('is_admin',$is_admin);
        
     }
@@ -143,11 +150,7 @@ class HomeController extends Controller
     }
     public function destroy($id)
 {
-    
-    
-        //$task = Task::findOrFail($id);
-        //$task->employees()->detach(); // remove any employee-task assignments for this task
-        //$task->delete();
+   
         $this->authorize("task.delete");
         $task =Task::whereId($id)->update([
          'operation'=>'D'
@@ -194,6 +197,7 @@ class HomeController extends Controller
         ->where('tasks.operation','=','dis')
         ->where('tasks.id','=',$request->idtask)
         ->get();
+     
        
         return response()->json([
             'statut'            =>200,
@@ -223,12 +227,33 @@ class HomeController extends Controller
             'name'     => $request->Employe,
         ]);
 
-        //  if (strcmp($task->status ,'Delivred')) {
-        //      $rapport = new Rapport();
-        //      $rapport->task_id = $task->id;
-        //      $rapport->save(); }
 
-        return response()->json([
+
+        $status='Delivred';
+        $ReportTasks  = Task::where('status','=',$status)->get();
+       
+
+        foreach ($ReportTasks as $ReportTask) {
+            if (strcmp($ReportTask->status, 'Delivered') !== 0 && $ReportTask->id == $request->id) {
+                $report = new Report();
+                $report->projectname = $ReportTask->projectname;
+                $report->todo = $ReportTask->todo;
+                $report->type = $ReportTask->type;
+                $report->deadline = $ReportTask->deadline;
+                $report->status = $ReportTask->status;
+        
+                $ReportTask->report()->save($report);
+            }
+        }
+        
+
+
+
+
+
+ 
+
+     return response()->json([
             'statut'            =>200,
         ]);
 

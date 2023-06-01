@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rapports', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('task_id');
+        Schema::create('reports', function (Blueprint $table) {
+           
+            $table->bigIncrements('id');
             $table->string('projectname');
             $table->string('todo');
             $table->string('type')->nullable();
-            $table->string('operation')->nullable();
             $table->dateTime('deadline');
             $table->string('status')->default('Pending');
-            $table->text('history')->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('task_id');
+            $table->foreign('task_id')->references('id')->on('tasks');
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rapports');
+        Schema::dropIfExists('reports');
     }
 };

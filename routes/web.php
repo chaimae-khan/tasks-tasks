@@ -28,11 +28,8 @@ Route::get('/register', [App\Http\Controllers\RegistrationController::class, 'sh
 Route::post('/register', [App\Http\Controllers\RegistrationController::class, 'registerUser'])->name('register.user');
 Route::get('/test', [App\Http\Controllers\RegistrationController::class, 'index']);
 Route::delete('/test/{id}', [App\Http\Controllers\RegistrationController::class, 'destroy'])->name('register.destroy');
+Route::get('/Reports', [App\Http\Controllers\ReportController::class, 'index']);
 
-//Route::delete('/tasks/{id}', [App\Http\Controllers\HomeController::class, 'destroy'])->name('tasks.destroy');
-//Route::post('/admin', [App\Http\Controllers\HomeController::class, 'store'])->name('tasks.store');
-
-// Route::get('getHistory',[App\Http\Controllers\HomeController::class,'getHistory']);
 Route::get('getTask',[HomeController::class,'getTask']);
 Route::get('UpdateProjet',[ProjectController::class,'UpdateProjet']);
 Route::get('getproject',[ProjectController::class,'getproject']);
@@ -48,6 +45,7 @@ Route::middleware('admin')->group(function () {
     Route::get('employees/{id}', [App\Http\Controllers\HomeController::class, 'getEmployees'])->name('employees.getEmployees');
     Route::get('getHistory',[App\Http\Controllers\HomeController::class,'getHistory']);
     Route::resource('projects', ProjectController::class);
+   
   
 });
 

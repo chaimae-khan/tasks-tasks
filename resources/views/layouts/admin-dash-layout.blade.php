@@ -162,6 +162,10 @@
                                 <i class="fas fa-chart-bar"></i>Register</a>
                         </li>
                         <li>
+                            <a href="/Reports">
+                                <i class="fas fa-table"></i>Report</a>
+                        </li>
+                        <li>
                             <a href="/admin">
                                 <i class="fas fa-table"></i>Tasks</a>
                         </li>

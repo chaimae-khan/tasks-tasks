@@ -2,7 +2,27 @@
 
 @section('content')
     
+<style>
 
+.low-priority {
+  background-color: #CFE2F3;
+}
+
+.not-critical-priority {
+  background-color: #a5d2a5;
+}
+
+.normal-priority {
+  background-color: orange;
+}
+
+.urgent-priority {
+  background-color: 
+#e57f7f
+;
+}
+
+</style>
 
     
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
@@ -23,7 +43,7 @@
         <thead>
             <tr>
                 {{-- <th>id</th> --}}
-                <th> Project Name</th>
+                <th> Priority </th>
                 <th> Project </th>
                 <th>To-Do</th>
                 <th>Employee </th>
@@ -39,7 +59,18 @@
                 
                     <tr>
                         {{-- <td>{{$task->id}}</td> --}}
-                        <td>{{ $task->projectname }}</td>
+                      
+                        <td class="
+                        @if ($task->projectname === 'low')
+                            low-priority
+                        @elseif ($task->projectname === 'not critical')
+                            not-critical-priority
+                        @elseif ($task->projectname === 'normal')
+                            normal-priority
+                        @elseif ($task->projectname === 'uregent')
+                            urgent-priority
+                        @endif">{{ $task->projectname }}</td>
+                       
                         <th>{{ $task->Descrption }}</th>
                         <td>{{ $task->todo }}</td>
 
@@ -198,7 +229,7 @@
             if(response.statut == 200)
               {
                 
-              console.log(response.data[0].assigned_date);
+              // console.log(response.data[0].assigned_date);
               $('#PName').val(response.data[0].projectname);
               $('#Employe').val(response.data[0].name);
               $('#Statuts').val(response.data[0].status);
@@ -292,7 +323,13 @@
       }
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td><input type="text" name="projectname"></td>
+           
+            <td><select class="browser-default custom-select" name="projectname" id="projectname">
+                @foreach ($PriorityTask as $item)
+                    <option value="{{ $item }}">{{ $item }}</option> 
+                 @endforeach
+                  
+             </select></td>
             <td><select class="browser-default custom-select" name="project_name" id="project_name">
                 @foreach ( $project as $p)
                     <option value="{{ $p->id }}">{{ $p->name }}</option>

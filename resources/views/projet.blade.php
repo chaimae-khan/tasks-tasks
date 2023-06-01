@@ -65,11 +65,11 @@
         <div class="modal-body">
           <div class="form-group">
                               <label for="name">Name</label>
-                              <input type="text" name="name" id="name" class="form-control" required>
+                              <input type="text" name="Descrption" id="Descrption" class="form-control" required>
                           </div>
    <div class="form-group">
                               <label for="Descrption">Descrption</label>
-                              <textarea name="Descrption" id="Descrption" class="form-control" required></textarea>
+                              <textarea name="name" id="name" class="form-control" required></textarea>
                           </div>
         </div>
         <div class="modal-footer">

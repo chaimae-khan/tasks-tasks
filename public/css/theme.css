@@ -4258,6 +4258,22 @@ section {
     padding: 12px 40px;
     white-space: nowrap;
 }
+.priority-low {
+    background-color: gray;
+}
+
+.priority-not-critical {
+    background-color: green;
+}
+
+.priority-normal {
+    background-color: orange;
+}
+
+.priority-uregent {
+    background-color: red;
+}
+
 
 .table-earning tbody td.text-right {
     padding-left: 15px;

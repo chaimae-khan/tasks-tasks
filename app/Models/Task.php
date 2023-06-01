@@ -29,10 +29,10 @@ class Task extends Model
     {
         return $this->belongsTo(Projectt::class,'porejct_id');
     }
-    public function rapport()
-    {
-        return $this->hasOne(Rapport::class);
-    }
+    public function Report()
+        {
+            return $this->hasOne(Report::class);
+        }
 
     
    
