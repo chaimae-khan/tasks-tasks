@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use PHPUnit\Event\Code\Test;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\HomeController;
-
+use Spatie\Activitylog\Models\Activity;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +16,12 @@ use App\Http\Controllers\HomeController;
 |
 */
 Route::get('/', function () {
+    // return Activity::all();
     return view('welcome');
 });
 
 Auth::routes();
-
+Route::get('/historical', [App\Http\Controllers\HistoricalController::class, 'index']);
 Route::get('/Profile', [App\Http\Controllers\AdminController::class, 'profile']);
 Route::get('/home', [App\Http\Controllers\AdminController::class, 'index']);
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('tasks.index');

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('projectts', function (Blueprint $table) {
            
                 $table->id();
-                $table->string('name');
+                $table->string('name_project');
                 $table->string('Descrption')->default('test');
                 $table->timestamps();
         });

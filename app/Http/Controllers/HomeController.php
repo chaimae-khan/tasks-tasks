@@ -14,6 +14,7 @@ use App\Models\Projectt;
 use App\Models\Report;
 use App\Notifications\NewTaskNotification;
 /* use Illuminate\Notifications\Notification; */
+
 use Illuminate\Support\Facades\Notification;
 
 use function GuzzleHttp\Promise\task;
@@ -44,24 +45,12 @@ class HomeController extends Controller
         ->join('employee_task','employee_task.task_id','=','tasks.id')
         ->join('employees','employees.id','=','employee_task.employee_id')
         ->join('projectts','projectts.id','=','tasks.projct_id')
-        ->select('tasks.*','employees.name','employee_task.assigned_date','projectts.Descrption')
+        ->select('tasks.*','employees.name','employee_task.assigned_date','projectts.name_project')
         ->where('tasks.operation','=','dis')
         ->whereNotIn('tasks.id',function($query){
             $query->select('task_id')->from('reports');})
         ->get();
-       
-  
-
-        // $tasks = DB::table('tasks')
-        // ->join('projectts','projectts.id','=','tasks.projct_id')
-        // ->join('employee_task','employee_task.task_id','=','tasks.id')
-        // ->join('employees','employees.id','=','employee_task.employee_id')
-        // ->where('tasks.operation','=','dis')
-        // ->whereNotIn('tasks.id',function($query){
-        //         $query->select('task_id')->from('reports');
-        // })->get();
-        
-        
+     
 
         $emp = Employee::all();
         $project= Projectt::all();
@@ -95,7 +84,7 @@ class HomeController extends Controller
     
 
     $projectName = $request->input('project_name');
-    $project = Projectt::where('name', $projectName)->first();
+    $project = Projectt::where('name_project', $projectName)->first();
     
         $task = Task::with('project')->get();
         $task = new Task();
@@ -264,5 +253,4 @@ class HomeController extends Controller
   
 
 }
-
 

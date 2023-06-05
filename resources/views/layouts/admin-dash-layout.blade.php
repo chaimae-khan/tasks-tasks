@@ -169,6 +169,10 @@
                             <a href="/admin">
                                 <i class="fas fa-table"></i>Tasks</a>
                         </li>
+                        <li>
+                            <a href="/historical">
+                                <i class="fas fa-table"></i>Historical</a>
+                        </li>
                         
                         <li>
                             <a href="/projects">

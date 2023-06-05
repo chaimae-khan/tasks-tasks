@@ -71,7 +71,7 @@
                             urgent-priority
                         @endif">{{ $task->projectname }}</td>
                        
-                        <th>{{ $task->Descrption }}</th>
+                        <th>{{ $task->name_project }}</th>
                         <td>{{ $task->todo }}</td>
 
                         <td>{{ $task->name }}</td>
@@ -146,8 +146,13 @@
                 @if(Auth::user()->is_admin == 1)
                 <div class="col-md-6">
                  
-                    <label for="">Project Name</label>
-                    <input type="text" class="form-control" id="PName">
+                    <label for="">Priority</label>
+                    <select name="PName" id="PName" class="form-control" >
+                      @foreach($PriorityTask as $item)
+                        <option value="{{$item}}">{{$item}}</option>
+                      @endforeach
+                    </select>
+                   
                     <label for="">Employee</label>
                     <select name="" id="Employe" class="form-control" >
                       @foreach($emp as $item)
@@ -156,7 +161,11 @@
                     </select>
                    
                     <label for="">Status</label>
-                    <input type="text" class="form-control" id="Statuts">
+                    <select name="Statuts" id="Statuts" class="form-control" >
+                      @foreach($statutTask as $item)
+                        <option value="{{$item}}">{{$item}}</option>
+                      @endforeach
+                    </select>
                     
                    
                     
@@ -230,6 +239,7 @@
               {
                 
               // console.log(response.data[0].assigned_date);
+              
               $('#PName').val(response.data[0].projectname);
               $('#Employe').val(response.data[0].name);
               $('#Statuts').val(response.data[0].status);
@@ -332,7 +342,7 @@
              </select></td>
             <td><select class="browser-default custom-select" name="project_name" id="project_name">
                 @foreach ( $project as $p)
-                    <option value="{{ $p->id }}">{{ $p->name }}</option>
+                    <option value="{{ $p->id }}">{{ $p->name_project }}</option>
                  @endforeach
                   
              </select></td>
@@ -384,7 +394,7 @@
                     "projectname": projectname,
                     "todo": todo,
                     "employee": employee,
-                    "projct_id" :project_name, //hada 
+                    "projct_id" :project_name, 
                     "type": type,
                     "status": status,
                     "deadline": deadline,

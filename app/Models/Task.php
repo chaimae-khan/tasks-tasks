@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 
 
 class Task extends Model
 {
     use HasFactory; 
+    use LogsActivity;
     public function employees()
     {
         return $this->belongsToMany(Employee::class)->withPivot('assigned_date');
@@ -33,6 +37,13 @@ class Task extends Model
         {
             return $this->hasOne(Report::class);
         }
+        public function getActivitylogOptions(): LogOptions
+        {
+            return LogOptions::defaults()
+                ->logOnly(['status', 'projectname']) // specify the attributes you want to log
+                ->dontSubmitEmptyLogs();
+        }
+         
 
     
    

@@ -2,15 +2,26 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Haruncpi\LaravelUserActivity\Traits\Loggable;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable
 {
+    
     use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use LogsActivity;
+    use Notifiable;
+    use Loggable;
+   
+
     public function isAdmin()
     {
         return $this->is_admin === 1; 
@@ -66,7 +77,13 @@ class User extends Authenticatable
 
         // Perform any additional actions after deleting the user
     }
-     
+   
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['name', 'email']) // specify the attributes you want to log
+            ->dontSubmitEmptyLogs();
+    }
      
      }
 

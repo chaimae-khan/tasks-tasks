@@ -32,8 +32,8 @@
                         <tbody>
                             @foreach ($projectts as $project)
                                 <tr>
-                                    <td>{{ $project->name }}</td>
-                                    <td>{{ $project->Descrption }}</td>
+                                    <td>{{ $project->name_project }}</td>
+                                    <td>{{ $project->Descrption  }}</td>
                                     <td>
                                         <form action="{{ route('projects.destroy', $project->id) }}" method="POST" style="display: inline">
                                             @csrf
@@ -63,13 +63,13 @@
            
         </div>
         <div class="modal-body">
-          <div class="form-group">
+                          <div class="form-group">
                               <label for="name">Name</label>
-                              <input type="text" name="Descrption" id="Descrption" class="form-control" required>
+                              <input type="text" name="name_project" id="name_project" class="form-control" required>
                           </div>
-   <div class="form-group">
+                           <div class="form-group">
                               <label for="Descrption">Descrption</label>
-                              <textarea name="name" id="name" class="form-control" required></textarea>
+                              <textarea name="Descrption" id="Descrption" class="form-control" required></textarea>
                           </div>
         </div>
         <div class="modal-footer">
@@ -99,8 +99,8 @@ $('#tableProjet tbody').on('click', '#btnupdate', function() {
         success: function(response) {
             if (response.statut == 200 ) {
            
-               console.log(response.data[0].name);
-                $('#name').val(response.data[0].name);
+               console.log(response.data[0].name_project);
+                $('#name_project').val(response.data[0].name_project);
                  $('#Descrption').val(response.data[0].Descrption); 
                  $('#modalUpdat').modal('show');
             }
@@ -115,7 +115,7 @@ $('#btnUdapteProjet').on('click', function() {
         type: "get",
         url: "{{url('UpdateProjet')}}",
         data: {
-            name: $('#name').val(),
+          name_project: $('#name_project').val(),
             desc: $('#Descrption').val(), 
             id: idprojet,
         },
@@ -135,7 +135,7 @@ const tableBody = document.querySelector('tbody');
 addProjectButton.addEventListener('click', function() {
   const newRow = document.createElement('tr');
   newRow.innerHTML = `
-    <td><input type="text" name="name"></td>
+    <td><input type="text" name="name_project"></td>
     <td><input type="text" name="Descrption"></td>
     <td>
       <button class="saveButton">save</button>
@@ -145,7 +145,7 @@ addProjectButton.addEventListener('click', function() {
 
   const saveButton = newRow.querySelector('.saveButton');
   saveButton.addEventListener('click', function() {
-    const name = newRow.querySelector('[name=name]').value;
+    const name_project = newRow.querySelector('[name=name_project]').value;
     const Descrption = newRow.querySelector('[name=Descrption]').value;
 
     $.ajax({
@@ -153,7 +153,7 @@ addProjectButton.addEventListener('click', function() {
       type: "POST",
       data: {
         "_token": "{{ csrf_token() }}",
-        "name": name,
+        "name_project": name_project,
         "Descrption": Descrption
       },
       success: function(response) {

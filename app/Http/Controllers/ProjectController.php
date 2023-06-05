@@ -59,7 +59,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $project = new Projectt();
-        $project->name = $request->input('name');
+        $project->name_project = $request->input('name_project');
         $project->Descrption = $request->input('Descrption');
         $project->save();
         return response()->json(['success' => true]);
@@ -104,7 +104,7 @@ class ProjectController extends Controller
     {
         
         $updatProjet = Projectt::where('id','=',$request->id)->update([
-            'name'          => $request->name,
+            'name_project'          => $request->name_project,
             'Descrption'       =>$request->desc,
         ]);
         return response()->json([
