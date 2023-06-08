@@ -46,6 +46,7 @@ Route::middleware('admin')->group(function () {
     Route::get('employees/{id}', [App\Http\Controllers\HomeController::class, 'getEmployees'])->name('employees.getEmployees');
     Route::get('getHistory',[App\Http\Controllers\HomeController::class,'getHistory']);
     Route::resource('projects', ProjectController::class);
+    
    
   
 });

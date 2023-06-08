@@ -74,14 +74,13 @@ class HomeController extends Controller
     }
     public function store(Request $request)
     {
-       
+        
+         
    $employee = Employee::firstOrCreate([
     'name' => $request->employee
     ]);
    
 
-
-    
 
     $projectName = $request->input('project_name');
     $project = Projectt::where('name_project', $projectName)->first();
@@ -101,7 +100,26 @@ class HomeController extends Controller
         $task->deadline = $request->input('deadline');
         $task->history =' #'.'work on it '.$request->employee.' date created task '.Carbon::now();
         $task->save();
-        
+        $status ='Delivered';
+      
+        if(strcmp($task->status,$status)!== 0){
+            $report = new Report();
+            $report->projectname = $task->projectname;
+            $report->todo = $task->todo;
+            $report->type = $task->type;
+            $report->deadline = $task->deadline;
+            $report->status = $task->status;
+            $report->task_id=$task->id;
+            $report->save();
+
+        }
+       else{
+
+        return response()->json([
+            'statut'    =>400,
+        ]);
+
+       }
        
        
         $employeeTask = new EmployeeTask();
@@ -131,15 +149,38 @@ class HomeController extends Controller
                 'statut'    =>400,
             ]);
         }
+         activity()
+        ->causedBy(auth()->user())
+        ->performedOn($task)
+        ->withProperties([
+            'attributes' => [
+                'projectname '=>$request->input('projectname'),
+                'todo'        => $request->input('todo'),
+                'type'        => $request->input('type'),
+                'status'      => $request->input('status'),
+                'deadline'   =>$request->input('deadline'),
+                'assigned_date'=>$request->input('assigned_date'),
+                'employee'=> $request->employee,
+
+            ],
+        ])
+        ->event('created')
+        ->log('Task created');
       
-        
         
     
         return response()->json(['success' => true]);
     }
     public function destroy($id)
 {
-   
+    activity()
+    ->causedBy(auth()->user())
+    ->withProperties([
+        'id' => $id,
+       
+    ])
+    ->event('delete')
+    ->log('task deleted');
         $this->authorize("task.delete");
         $task =Task::whereId($id)->update([
          'operation'=>'D'
@@ -197,26 +238,64 @@ class HomeController extends Controller
 
     public function updateTask(Request $request)
     {
+        
+        $task = Task :: findOrFail($request->id);
+        $employee_task = DB::select("select employee_id from employee_task where task_id =?",[$request->id]);
+        
+        $employee = Employee ::findOrFail($employee_task[0]->employee_id);
+        //  dd($employee->name);
+        activity()
+        ->causedBy(auth()->user())
+        ->performedOn($task,$employee)
+        ->withProperties([
+            'old' => [
+                'Priority' => $task->projectname,
+                'todo'     => $task->todo ,
+                'type'     => $task->type ,
+                'emplyee'  => $employee->name,
+                'status'   => $task->status,
+               'deadline'  => $task->deadline,
+
+                            
+
+            ],
+            'attributes' => [
+            'Priority'       =>$request->input('PName'),
+            'todo'           =>$request->input('Todo'),
+            'type'           =>$request->input('Type'),
+            'deadline'       =>$request->input('Deadline'),
+            'status'         =>$request->input('Statuts'),
+            'employee'       =>$request->input('Employe'),
+       
+
+            ],
+        ])
+        ->event('update')
+        ->log('Task updated');
+
+      
+        
         $task  = Task::where('id','=',$request->id)->update([
             'projectname'                   =>$request->PName,
             'todo'                          =>$request->Todo,
             'type'                          =>$request->Type,
             'deadline'                      =>$request->Deadline,
-            'status'                       =>$request->Statuts,
+            'status'                        =>$request->Statuts,
         ]);
+        
+        $employee = DB::select("select id from employees where name = ?", [$request->Employe]);
         $employee_task = DB::select("select id from employee_task where task_id =?",[$request->id]);
 
         $UpdateEmployeeTask = EmployeeTask::where('id','=',$employee_task[0]->id)->update([
             'assigned_date'     => $request->ADate,
+            'employee_id'       => $employee[0]->id,
+            
         ]);
+        
 
-        $idemployee = DB::select("select employee_id from employee_task where task_id =?",[$request->id]);
-      
-        $UpdateEmployee = Employee::where('id','=',$idemployee[0]->employee_id)->update([
-            'name'     => $request->Employe,
-        ]);
+       
 
-
+       
 
         $status='Delivred';
         $ReportTasks  = Task::where('status','=',$status)->get();

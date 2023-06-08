@@ -82,7 +82,7 @@
                         <td class="project-actions ">
                           <a class="btn  btn-primary  btn-sm iconDispalyhistory "   value="{{$task->id}}" id='' > <i class="fa fa-eye">  </i> View</a>
                           <a class="btn btn-info btn-sm btnupdate"  value={{$task->id}}>  <i class="fas fa-pencil-alt">  </i> Edit </a>
-                         <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline">
+                         <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline" onclick="return confirm('Are you sure you want to delete this task?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i> 

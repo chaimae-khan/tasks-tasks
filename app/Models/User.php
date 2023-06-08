@@ -7,9 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Haruncpi\LaravelUserActivity\Traits\Loggable;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Activitylog\LogOptions;
+// use Haruncpi\LaravelUserActivity\Traits\Loggable;
+// use Spatie\Activitylog\Traits\LogsActivity;
+// use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable
 {
@@ -17,10 +17,14 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     use HasApiTokens;
     use HasFactory;
-    use LogsActivity;
+    // use LogsActivity;
     use Notifiable;
-    use Loggable;
-   
+    // use Loggable;
+    // protected static $recordEvents=['created','updated','deleted'];
+
+    // protected static $logAttributes =['name','email'];
+
+
 
     public function isAdmin()
     {
@@ -78,12 +82,15 @@ class User extends Authenticatable
         // Perform any additional actions after deleting the user
     }
    
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logOnly(['name', 'email']) // specify the attributes you want to log
-            ->dontSubmitEmptyLogs();
-    }
-     
+    // public function getActivitylogOptions(): LogOptions
+    // {
+    //     return LogOptions::defaults()
+           
+    //         ->logOnly(['name', 'email'])
+    //         ->logFillable()
+    //         ->logOnlyDirty()
+    //         ->dontSubmitEmptyLogs();
+    // }
+   
      }
 

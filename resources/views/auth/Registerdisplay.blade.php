@@ -3,10 +3,19 @@
 @section('content')
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
 <div class="card-body p-0">
-        @if (Auth::user()->is_admin !==1)
-                    <p>You are not authorized to access this page.</p>
-                @else
-                  
+    <div class="row justify-content-center">
+        <div class="col-md-8">   
+            <div class="card">
+                <div class="card-header">users</div>
+                @if (Auth::user()->is_admin !==1)
+                  <div class="card-body">
+                          <p>You are not authorized to access this page.</p>
+                        </div> 
+                    </div>   
+               </div> 
+           </div> 
+                       @else
+               
         <div class="card-body p-0">
         
             <table class="table table-striped projects" id="tableuser">
@@ -37,14 +46,15 @@
                           <td>{{ $user->status }}</td>
                           <td>{{ $user->status }}</td>
                           <td>{{ $user->skills }}</td>
-                           <td class="project-actions ">
+                        <td class="project-actions ">
                             {{-- <a class="btn  btn-primary  btn-sm iconDispalyhistory "   value="{{$user->id}}" id='' > <i class="fa fa-eye">  </i> View</a> --}}
+                            
                             <a class="btn btn-info btn-sm btnupdate" id="btnupdate" value={{$user->id}}>  <i class="fas fa-pencil-alt">  </i> Edit </a>
                             <form action="{{ route('register.destroy', $user->id) }}" method="POST" style="display: inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure you want to delete this project?')" >Delete</button>
+                                    onclick="return confirm('Are you sure you want to delete this user?')" >Delete</button>
                             </form>
                          
                    </td> 

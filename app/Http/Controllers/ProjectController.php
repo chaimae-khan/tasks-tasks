@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Projectt;
 use App\Models\User;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
+use Spatie\Activitylog\Models\Activity;
 
 class ProjectController extends Controller
 {
@@ -58,11 +59,24 @@ class ProjectController extends Controller
    
     public function store(Request $request)
     {
+      
         $project = new Projectt();
         $project->name_project = $request->input('name_project');
         $project->Descrption = $request->input('Descrption');
         $project->save();
+        activity()
+        ->causedBy(auth()->user())
+        ->performedOn($project)
+        ->withProperties([
+            'attributes' => [
+                'name_project' => $request->input('name_project'),
+                'Descrption' => $request->input('Descrption'),
+            ],
+        ])
+        ->event('created')
+        ->log('user created');
         return response()->json(['success' => true]);
+        
     }
 
     
@@ -96,20 +110,52 @@ class ProjectController extends Controller
     {
         
         $project = Projectt::findOrFail($id);
+        activity()
+        ->causedBy(auth()->user())
+        ->performedOn( $project)
+        ->withProperties([
+            'old' => [
+                'name' =>  $project->name_project,
+                'Descrption' =>  $project->Descrption,
+            ]
+            
+        ])
+        ->event('deleted')
+        ->log('Project deleted');
         $project->delete();
         return redirect()->back();
     }
 
     public function UpdateProjet(Request $request)
     {
-        
+        $project = Projectt :: findOrFail($request->id);
+
+        activity()
+        ->causedBy(auth()->user())
+        ->performedOn($project)
+        ->withProperties([
+            'old' => [
+                'name_project' => $project->name_project,
+                'Descrption' => $project->Descrption,
+            ],
+            'attributes' => [
+                'name_project' => $request->input('name_project'),
+                'Descrption' => $request->input('desc'),
+            ],
+        ])
+        ->event('update')
+        ->log('project updated');
+
+     
         $updatProjet = Projectt::where('id','=',$request->id)->update([
             'name_project'          => $request->name_project,
-            'Descrption'       =>$request->desc,
+            'Descrption'            =>$request->desc,
         ]);
         return response()->json([
             'statut'            =>200,
         ]);
+      
+       
     }
     
     
