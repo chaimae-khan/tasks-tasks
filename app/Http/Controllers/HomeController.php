@@ -100,26 +100,7 @@ class HomeController extends Controller
         $task->deadline = $request->input('deadline');
         $task->history =' #'.'work on it '.$request->employee.' date created task '.Carbon::now();
         $task->save();
-        $status ='Delivered';
-      
-        if(strcmp($task->status,$status)!== 0){
-            $report = new Report();
-            $report->projectname = $task->projectname;
-            $report->todo = $task->todo;
-            $report->type = $task->type;
-            $report->deadline = $task->deadline;
-            $report->status = $task->status;
-            $report->task_id=$task->id;
-            $report->save();
-
-        }
-       else{
-
-        return response()->json([
-            'statut'    =>400,
-        ]);
-
-       }
+       
        
        
         $employeeTask = new EmployeeTask();

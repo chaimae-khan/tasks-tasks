@@ -25,35 +25,63 @@
 </style>
 
     
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
-        <div class="w3-bar w3-black">
+    
+        {{-- <div class="w3-bar w3-black"> --}}
           
+   
             
-            
-          <div>
-        
-          <button class="w3-button w3-right"  id="addTaskButton">Add new </button>
-        </div>
+           
+          {{-- <button class="w3-button w3-right"   id="addTaskButton">Add new </button>
+        </div> --}}
         
        
      
-        <div class="card-body p-0">
-        
-          <table class="table table-striped projects" id="tableTasks">
-        <thead>
-            <tr>
-                {{-- <th>id</th> --}}
-                <th> Priority </th>
-                <th> Project </th>
-                <th>To-Do</th>
-                <th>Employee </th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Deadline</th>
-                <th>Assigned Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+        <div class="card">
+          <div class="card-header actions-toolbar">
+            <div class="actions-search" id="actions-search">
+              <div class="input-group input-group-merge input-group-flush">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-transparent"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control form-control-flush" placeholder="Type and hit enter ...">
+                <div class="input-group-append">
+                  <a href="#" class="input-group-text bg-transparent" data-action="search-close" data-target="#actions-search"><i class="fas fa-times"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-between align-items-center">
+              <div class="col-lg col-md col-12">
+                <h6 class="text-uppercase d-inline-block mb-0">All Tasks</h6>
+              </div>
+              <div class="col d-flex align-items-center justify-content-between justify-content-md-end">
+                <div class="actions d-inline-block">
+                  <div class="col-auto d-flex align-items-center justify-content-between justify-content-md-end">
+                   <a href="#" class="btn btn-sm btn-primary btn-icon rounded-pill" data-toggle="modal" data-target="#add-project"  id="addTaskButton">
+                   <span class="btn-inner--icon" >Add Project <i class="fas fa-plus ml-2"></i></span>
+                   </a>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive list-content">
+            <table class="table table-striped projects" id="tableTasks">
+                <thead>
+                  <tr>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">To-Do</th>      
+                    <th scope="col">Employee</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Assigned Date</th>
+                    <th scope="col">Action</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
         <tbody>
             @foreach ($tasks as $task)
                 
@@ -79,32 +107,24 @@
                         <td>{{ $task->status }}</td>
                         <td>{{ $task->deadline }}</td>
                         <td>{{ $task->assigned_date }}</td>
-                        <td class="project-actions ">
-                          <a class="btn  btn-primary  btn-sm iconDispalyhistory "   value="{{$task->id}}" id='' > <i class="fa fa-eye">  </i> View</a>
-                          <a class="btn btn-info btn-sm btnupdate"  value={{$task->id}}>  <i class="fas fa-pencil-alt">  </i> Edit </a>
-                         <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline" onclick="return confirm('Are you sure you want to delete this task?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i> 
-                              Delete</button> 
-                          </form>
-                        
-                        
+                        <td class="project-actions">
                          
-                     
-
-               
-               
-                 
-           
-           
-         
-        </td>
-                            
-                        
-                    </tr>
-                
-            @endforeach
+                          <div>
+                              <i class="fa fa-cog" data-toggle="collapse" data-target="#buttonsContainer{{ $task->id }}"></i>
+                              <div id="buttonsContainer{{ $task->id }}" class="collapse">
+                                  <a class="btn btn-primary btn-sm iconDispalyhistory" value="{{$task->id}}" id="" style="background-color: #006600; color: white;"><i class="fa fa-eye"></i> View</a>
+                                  <a class="btn btn-info btn-sm btnupdate" value={{$task->id}} style="color: white;"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                  <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline" onclick="return confirm('Are you sure you want to delete this task?')">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                                  </form>
+                              </div>
+                          </div>
+                      </td>
+                  </tr>
+              @endforeach
+  
         
         </tbody>
     </table>
@@ -222,7 +242,10 @@
           </div>
         </div>
       </div>
-    
+      <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
+     
+
+      
 <script>
   var idtaskUpdate = 0;
   $('#tableTasks tbody').on('click','.btnupdate',function(){
@@ -421,4 +444,19 @@
         });
     });
 </script>
+
+<!-- [END] Omnisearch -->
+<!-- Core JS - includes jquery, bootstrap, popper, in-view, and sticky-kit -->
+<script src="assets/js/novato.core.js"></script>
+<!-- Page JS -->
+<script src="assets/libs/progressbar.js/dist/progressbar.min.js"></script>
+<script src="assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="assets/libs/moment/min/moment.min.js"></script>
+<script src="assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="assets/libs/select2/dist/js/select2.min.js"></script>
+<script src="assets/libs/jquery-webui-popover/jquery.webui-popover.min.js"></script>
+<!-- Novato JS -->
+<script src="assets/js/novato.js"></script>
+<script src="assets/js/main.js"></script>
+
 @endsection
