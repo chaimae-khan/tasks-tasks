@@ -165,6 +165,11 @@
                             <a href="/register">
                                 <i class="fa fa-user-plus"></i>Register</a>
                         </li>
+                           <li>
+                            <a href="/Dashboard">
+                                <i class="fa fa-user-plus"></i>Dashboard</a>
+                        </li>
+
                         <li>
                             <a href="/Reports">
                                 <i class="fa fa-book"></i>Report</a>

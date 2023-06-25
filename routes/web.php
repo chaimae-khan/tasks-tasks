@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/historical', [App\Http\Controllers\HistoricalController::class, 'index']);
+Route::get('/Dashboard', [App\Http\Controllers\DashboardController::class, 'countAdmin']);
 Route::get('/Profile', [App\Http\Controllers\AdminController::class, 'profile']);
 Route::get('/home', [App\Http\Controllers\AdminController::class, 'index']);
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('tasks.index');
