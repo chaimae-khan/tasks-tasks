@@ -34,6 +34,10 @@
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
 
+    <link rel="stylesheet" href="{{ asset('assets/libs/@fortawesome/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/jquery-webui-popover/jquery.webui-popover.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" id="stylesheet">
 </head>
 
 <body class="animsition">
@@ -154,29 +158,30 @@
                     <ul class="list-unstyled navbar__list">
                         <li class="has-sub">
                             <a class="js-arrow" href="/test">
-                                <i class="fas fa-tachometer-alt"></i>users</a>
+                                <i class=" fa fa-users"></i>users</a>
                            
                         </li>
                         <li>
                             <a href="/register">
-                                <i class="fas fa-chart-bar"></i>Register</a>
+                                <i class="fa fa-user-plus"></i>Register</a>
                         </li>
                         <li>
                             <a href="/Reports">
-                                <i class="fas fa-table"></i>Report</a>
+                                <i class="fa fa-book"></i>Report</a>
                         </li>
                         <li>
                             <a href="/admin">
-                                <i class="fas fa-table"></i>Tasks</a>
+                                <i class="fa fa-tasks"></i>Tasks</a>
                         </li>
-                        <li>
-                            <a href="/historical">
-                                <i class="fas fa-table"></i>Historical</a>
-                        </li>
+                        
                         
                         <li>
                             <a href="/projects">
-                                <i class="fas fa-map-marker-alt"></i>Projects</a>
+                                <i class="fa fa-handshake-o"></i>Projects</a>
+                        </li>
+                        <li>
+                            <a href="/historical">
+                                <i class="fa fa-archive"></i>Historical</a>
                         </li>
                         
                       

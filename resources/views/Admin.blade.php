@@ -57,7 +57,7 @@
                 <div class="actions d-inline-block">
                   <div class="col-auto d-flex align-items-center justify-content-between justify-content-md-end">
                    <a href="#" class="btn btn-sm btn-primary btn-icon rounded-pill" data-toggle="modal" data-target="#add-project"  id="addTaskButton">
-                   <span class="btn-inner--icon" >Add Project <i class="fas fa-plus ml-2"></i></span>
+                   <span class="btn-inner--icon" >Add A new Task <i class="fas fa-plus ml-2"></i></span>
                    </a>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                     <th scope="col">Deadline</th>
                     <th scope="col">Assigned Date</th>
                     <th scope="col">Action</th>
-                    <th scope="col"></th>
+                    {{-- <th scope="col"></th> --}}
                   </tr>
                 </thead>
         <tbody>
@@ -108,19 +108,22 @@
                         <td>{{ $task->deadline }}</td>
                         <td>{{ $task->assigned_date }}</td>
                         <td class="project-actions">
-                         
                           <div>
-                              <i class="fa fa-cog" data-toggle="collapse" data-target="#buttonsContainer{{ $task->id }}"></i>
-                              <div id="buttonsContainer{{ $task->id }}" class="collapse">
-                                  <a class="btn btn-primary btn-sm iconDispalyhistory" value="{{$task->id}}" id="" style="background-color: #006600; color: white;"><i class="fa fa-eye"></i> View</a>
-                                  <a class="btn btn-info btn-sm btnupdate" value={{$task->id}} style="color: white;"><i class="fas fa-pencil-alt"></i> Edit</a>
-                                  <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline" onclick="return confirm('Are you sure you want to delete this task?')">
-                                      @csrf
-                                      @method('DELETE')
-                                      <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
-                                  </form>
-                              </div>
+                            <i class="fa fa-cog" onclick="toggleButtons({{ $task->id }})"></i>
+                            <div id="buttonsContainer{{ $task->id }}" style="display: none;">
+                              <a class="btn btn-primary btn-sm iconDispalyhistory" value="{{$task->id}}" id="" style="background-color: #006600; color: white;"><i class="fa fa-eye"></i> View</a>
+                              <a class="btn btn-info btn-sm btnupdate" value="{{$task->id}}" style="color: white;"><i class="fas fa-pencil-alt"></i> Edit</a>
+                              <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline" onclick="return confirm('Are you sure you want to delete this task?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                              </form>
+                            </div>
                           </div>
+                          
+                          
+                          
+                        
                       </td>
                   </tr>
               @endforeach
@@ -152,96 +155,149 @@
 
 
 
-      <div class="modal" tabindex="-1" role="dialog" id="modalUpdate">
+      <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modalUpdate">
         <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Update</h5>
+              <div>
+                <h5 class="modal-title" id="exampleModalLabel">Update task</h5>
+                <p class="text-muted mb-0" style="max-width: 466px;">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.rro cupiditate tempora saepe. Quam, pariatur.
+                </p>
+              </div>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+              <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <div class="row">
-                @if(Auth::user()->is_admin == 1)
-                <div class="col-md-6">
-                 
-                    <label for="">Priority</label>
-                    <select name="PName" id="PName" class="form-control" >
-                      @foreach($PriorityTask as $item)
-                        <option value="{{$item}}">{{$item}}</option>
-                      @endforeach
-                    </select>
+              <form>
+                <div class="row">
+                  <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+                    <div class="settings-left-img mt-5">
+                      <div class="account-img-upload">
+                        <div class="img-upload">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+           @if(Auth::user()->is_admin == 1)
+                    <div class="form-group">
+                      <label class="form-control-label">To-Do</label>
+                      <input class="form-control" type="text" placeholder="Enter your Client Name "id="Todo">
+                    </div>
+                    <div class="form-row mb-3">
+                      <div class="col-lg col-md col-sm-12 col-12">
+                        <label class="form-control-label">Priority </label>
+                         <select name="PName" id="PName" class="form-control" data-toggle="select" >
+                           @foreach($PriorityTask as $item)
+                            <option value="{{$item}}">{{$item}}</option>
+                           @endforeach
+                          </select>
+                        </select>
+                      </div>
+                      <div class="col-lg col-md col-sm-12 col-12">
+                        <label class="form-control-label">status </label>
+                         <select name="Statuts" id="Statuts" class="form-control" data-toggle="select" >
+                        @foreach($statutTask as $item)
+                          <option value="{{$item}}">{{$item}}</option>
+                        @endforeach
+                      </select>
+                      </div>
+                    </div>
+                    <div class="form-row mb-3">
+                      <div class="col-lg col-md col-sm-12 col-12">
+                        <label class="form-control-label">Employee </label>
+                        <select name="" id="Employe" class="form-control" data-toggle="select">
+                        @foreach($emp as $item)
+                          <option value="{{$item->name}}">{{$item->name}}</option>
+                        @endforeach
+                      </select>
+                        
+                      </div>
+                      <div class="col-lg col-md col-sm-12 col-12">
+                        <label class="form-control-label">Type</label>
+                        <input type="text" class="form-control" placeholder="Nationality"id="Type">
+                      </div>
+                    </div>
+                    <div class="form-row mb-3">
+                      <div class="col-lg col-md col-sm-12 col-12-7">
+                        <label class="form-control-label">Deadline Date</label>
+                        <input type="date" class="form-control" placeholder="Address " id="Deadline">
+                      </div>
+                      <div class="col-lg col-md col-sm-12 col-12-7">
+                        <label class="form-control-label">Assigned Date</label>
+                        <input type="date" class="form-control" placeholder="Nationality"  id="ADate">
+                      </div>
+                    </div>
+            @else
+              <div class="form-group">
+                      <label class="form-control-label">To-Do</label>
+                      <input class="form-control" type="text" placeholder="Enter your Client Name "id="Todo" disabled>
+                    </div>
+                    <div class="form-row mb-3">
+                      <div class="col-lg col-md col-sm-12 col-12">
+                        <label class="form-control-label">Priority </label>
+              <select name="PName" id="PName" class="form-control" data-toggle="select" disabled >
+                           @foreach($PriorityTask as $item)
+                            <option value="{{$item}}">{{$item}}</option>
+                           @endforeach
+                          </select>
+                        </select>
+                      </div>
+                      <div class="col-lg col-md col-sm-12 col-12">
+                        <label class="form-control-label">status </label>
+                         <select name="Statuts" id="Statuts" class="form-control" data-toggle="select" >
+                        @foreach($statutTask as $item)
+                          <option value="{{$item}}">{{$item}}</option>
+                        @endforeach
+                      </select>
+                      </div>
+                    </div>
+                    <div class="form-row mb-3">
+                      <div class="col-lg col-md col-sm-12 col-12">
+                        <label class="form-control-label">Employee </label>
+                        <select name="" id="Employe" class="form-control" data-toggle="select" disabled>
+                        @foreach($emp as $item)
+                          <option value="{{$item->name}}">{{$item->name}}</option>
+                        @endforeach
+                      </select>
+                        
+                      </div>
+                      <div class="col-lg col-md col-sm-12 col-12">
+                        <label class="form-control-label">Type</label>
+                        <input type="text" class="form-control" placeholder="Nationality"id="Type" disabled>
+                      </div>
+                    </div>
+                    <div class="form-row mb-3">
+                      <div class="col-lg col-md col-sm-12 col-12-7">
+                        <label class="form-control-label">Deadline Date</label>
+                        <input type="date" class="form-control" placeholder="Address " id="Deadline"disabled>
+                      </div>
+                      <div class="col-lg col-md col-sm-12 col-12-7">
+                        <label class="form-control-label">Assigned Date</label>
+                        <input type="date" class="form-control" placeholder="Nationality"  id="ADate" disabled>
+                      </div>
+                     @endif
+                    </div>
+               
                    
-                    <label for="">Employee</label>
-                    <select name="" id="Employe" class="form-control" >
-                      @foreach($emp as $item)
-                        <option value="{{$item->name}}">{{$item->name}}</option>
-                      @endforeach
-                    </select>
-                   
-                    <label for="">Status</label>
-                    <select name="Statuts" id="Statuts" class="form-control" >
-                      @foreach($statutTask as $item)
-                        <option value="{{$item}}">{{$item}}</option>
-                      @endforeach
-                    </select>
+                      
                     
-                   
-                    
-                  
-                    <label for="">Assigned Date</label>
-                    <input type="date" class="form-control" id="ADate">
-                </div>
-                <div class="col-md-6">
-                  <label for="">To-Do</label>
-                  <input type="text" class="form-control" id="Todo">
-                  <label for="">Type</label>
-                  <input type="text" class="form-control" id="Type">
-                  <label for="">Deadline</label>
-                  <input type="date" class="form-control" id="Deadline">
-              </div>
-              @else
-                <div class="col-md-6">
-                  
-                  <label for="">Project Name</label>
-                  <input type="text" class="form-control" id="PName" disabled>
-                  <label for="">Employee</label>
-                  <select name="" id="Employe" class="fomr-select" disabled>
-                    @foreach($emp as $item)
-                      <option value="{{$item->name}}">{{$item->name}}</option>
-                    @endforeach
-                  </select>
-                 
                 
-                  <label for="">Status</label>
-                  <input type="text" class="form-control" id="Statuts" >
-                  
-                
-                  
-                
-                  <label for="">Assigned Date</label>
-                  <input type="date" class="form-control" id="ADate" disabled>
-              </div>
-              <div class="col-md-6">
-                <label for="">To-Do</label>
-                <input type="text" class="form-control" id="Todo" disabled>
-                <label for="">Type</label>
-                <input type="text" class="form-control" id="Type" disabled>
-                <label for="">Deadline</label>
-                <input type="date" class="form-control" id="Deadline" disabled>
+              </form>
+              
+                     
             </div>
-              @endif
+            <div class="modal-footer">
+              <button class="btn btn-primary" id="btnUpdateTask">Update</button>
             </div>
-                
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" id="btnUpdateTask">Update</button>
-          </div>
-          
           </div>
         </div>
       </div>
+    </div>
+
+            </div>
       <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
      
 
@@ -458,5 +514,14 @@
 <!-- Novato JS -->
 <script src="assets/js/novato.js"></script>
 <script src="assets/js/main.js"></script>
-
+<script>
+                            function toggleButtons(taskId) {
+                              var buttonsContainer = document.getElementById("buttonsContainer" + taskId);
+                              if (buttonsContainer.style.display === "none") {
+                                buttonsContainer.style.display = "block";
+                              } else {
+                                buttonsContainer.style.display = "none";
+                              }
+                            }
+  </script>
 @endsection
