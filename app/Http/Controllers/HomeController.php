@@ -40,108 +40,102 @@ class HomeController extends Controller
     { 
         
         $is_admin = Auth::user()->is_admin;
+       
+       
         
         $tasks = DB::table('tasks')
-        ->join('employee_task','employee_task.task_id','=','tasks.id')
-        ->join('employees','employees.id','=','employee_task.employee_id')
         ->join('projectts','projectts.id','=','tasks.projct_id')
-        ->select('tasks.*','employees.name','employee_task.assigned_date','projectts.name_project')
+        ->join('users','users.id','=','tasks.user_id')
+        ->select('tasks.*','projectts.name_project','users.name')
         ->where('tasks.operation','=','dis')
         ->whereNotIn('tasks.id',function($query){
             $query->select('task_id')->from('reports');})
         ->get();
      
 
-        $emp = Employee::all();
+        $user = User::all();
         $project= Projectt::all();
         $statutTask = ['Open','Delivred','To Do','To Test','Colosed','Cancled'];
         $PriorityTask = ['low ','not critical','normal','uregent'];
 
         return view('admin')
         ->with('tasks',$tasks)
-        ->with('emp',$emp)
         ->with('project',$project)
         ->with('statutTask',$statutTask)
         ->with('PriorityTask',$PriorityTask)
-        ->with('is_admin',$is_admin);
-       
+        ->with('is_admin',$is_admin)
+        ->with('user',$user);
+
     }
-    public function getEmployees(Request $request)
-    {
-        $this->authorize("task.getemployee");
-        $employees = Employee::where('id', $request->id)->pluck('name', 'id');
-        return response()->json($employees);
-    }
+    // public function getEmployees(Request $request)
+    // {
+    //     $this->authorize("task.getemployee");
+    //     $employees = Employee::where('id', $request->id)->pluck('name', 'id');
+    //     return response()->json($employees);
+    // }
     public function store(Request $request)
     {
         
          
-   $employee = Employee::firstOrCreate([
-    'name' => $request->employee
-    ]);
+//    $employee = Employee::firstOrCreate([
+//     'name' => $request->employee
+//     ]);
    
 
 
     $projectName = $request->input('project_name');
     $project = Projectt::where('name_project', $projectName)->first();
+    $userName = $request->input('user_name');
+    $user = User::where('name', $userName)->first();
     
         $task = Task::with('project')->get();
         $task = new Task();
         $this->authorize("task.create",$task);
-        $task->projectname = $request->input('projectname');
+        $task->priority = $request->input('priority');
         $task->todo = $request->input('todo');
         $task->type = $request->input('type');
         $task->projct_id =$request->projct_id;
+        $task->user_id =$request->user_id;
         $task->operation = 'Dis'; 
         $task->status = $request->input('status') ;
     
        
-    
         $task->deadline = $request->input('deadline');
+        $task->assignedDate= $request->input('assignedDate');
         $task->history =' #'.'work on it '.$request->employee.' date created task '.Carbon::now();
         $task->save();
        
        
        
-        $employeeTask = new EmployeeTask();
-        $employeeTask->employee_id = $employee->id;
-        $employeeTask->task_id = $task->id;
-        $employeeTask->assigned_date = $request->input('assigned_date');
-        $employeeTask->save();
+        // $employeeTask = new EmployeeTask();
+        // $employeeTask->employee_id = $employee->id;
+        // $employeeTask->task_id = $task->id;
+        // $employeeTask->assigned_date = $request->input('assigned_date');
+        // $employeeTask->save();
 
-        $employee = Employee::find($employee->id);
-        $name = $employee->name;
+        // $employee = Employee::find($employee->id);
+        // $name = $employee->name;
         $userName = Auth::user()->name;
         $Users = User::where('id','!=',Auth::user()->id)->get();
         $create_task = Auth::user()->name;
         $todo = $task->todo ;
 
-        
-        if(strcmp($userName , $name))
-        {
-           
             Notification::send($Users, new NewTaskNotification($task->id,$create_task,$todo));
             
 
-        }
-        else
-        {
-            return response()->json([
-                'statut'    =>400,
-            ]);
-        }
+      
          activity()
         ->causedBy(auth()->user())
         ->performedOn($task)
         ->withProperties([
             'attributes' => [
-                'projectname '=>$request->input('projectname'),
+                'priority'    =>$request->input('priority'),
                 'todo'        => $request->input('todo'),
                 'type'        => $request->input('type'),
                 'status'      => $request->input('status'),
                 'deadline'   =>$request->input('deadline'),
-                'assigned_date'=>$request->input('assigned_date'),
-                'employee'=> $request->employee,
+                'assignedDate'=>$request->input('assignedDate'),
+                'user_name'=> $request->user_name,
 
             ],
         ])
@@ -169,16 +163,16 @@ class HomeController extends Controller
      
         return redirect()->back();
     }
-    public function subEmp(Request $request)
-    {
+    // public function subEmp(Request $request)
+    // {
          
-        $employees = Employee::firstOrCreate([
-            'name' => $request->input('employee')
-        ]);
-        return response()->json([
-            'employees' => $employees
-        ]);
-    }
+    //     $employees = Employee::firstOrCreate([
+    //         'name' => $request->input('employee')
+    //     ]);
+    //     return response()->json([
+    //         'employees' => $employees
+    //     ]);
+    // }
 
     public function getHistory(Request $request)
     {
@@ -202,9 +196,9 @@ class HomeController extends Controller
     public function getTask(Request $request)
     {
         $tasks = DB::table('tasks')
-        ->join('employee_task','employee_task.task_id','=','tasks.id')
-        ->join('employees','employees.id','=','employee_task.employee_id')
-        ->select('tasks.*','employees.name',DB::raw('date(employee_task.assigned_date) as assigned_date'),DB::raw('date(tasks.deadline) as deadline'))
+        ->join('projectts','projectts.id','=','tasks.projct_id')
+        ->join('users','users.id','=','tasks.user_id')
+        ->select('tasks.*','projectts.name_project','users.name',DB::raw('date(tasks.assignedDate) as assignedDate'),DB::raw('date(tasks.deadline) as deadline'))
         ->where('tasks.operation','=','dis')
         ->where('tasks.id','=',$request->idtask)
         ->get();
@@ -221,16 +215,15 @@ class HomeController extends Controller
     {
         
         $task = Task :: findOrFail($request->id);
-        $employee_task = DB::select("select employee_id from employee_task where task_id =?",[$request->id]);
+        $employee_task = DB::select("select user_id from tasks where id =?",[$request->id]);
+        $employee = User ::findOrFail($employee_task[0]->user_id);
         
-        $employee = Employee ::findOrFail($employee_task[0]->employee_id);
-        //  dd($employee->name);
         activity()
         ->causedBy(auth()->user())
         ->performedOn($task,$employee)
         ->withProperties([
             'old' => [
-                'Priority' => $task->projectname,
+                'Priority' => $task->priority,
                 'todo'     => $task->todo ,
                 'type'     => $task->type ,
                 'emplyee'  => $employee->name,
@@ -241,7 +234,7 @@ class HomeController extends Controller
 
             ],
             'attributes' => [
-            'Priority'       =>$request->input('PName'),
+            'priority'       =>$request->input('priority'),
             'todo'           =>$request->input('Todo'),
             'type'           =>$request->input('Type'),
             'deadline'       =>$request->input('Deadline'),
@@ -257,21 +250,23 @@ class HomeController extends Controller
       
         
         $task  = Task::where('id','=',$request->id)->update([
-            'projectname'                   =>$request->PName,
+            'priority'                      =>$request->priority,
             'todo'                          =>$request->Todo,
             'type'                          =>$request->Type,
             'deadline'                      =>$request->Deadline,
+            'assignedDate'                  =>$request->ADate,
             'status'                        =>$request->Statuts,
         ]);
         
-        $employee = DB::select("select id from employees where name = ?", [$request->Employe]);
-        $employee_task = DB::select("select id from employee_task where task_id =?",[$request->id]);
-
-        $UpdateEmployeeTask = EmployeeTask::where('id','=',$employee_task[0]->id)->update([
-            'assigned_date'     => $request->ADate,
-            'employee_id'       => $employee[0]->id,
+         
+       
+        $employee = DB::select("select id from users  where id = ?", [$request->Employe]);
+        
+        $UpdateEmployeeTask = Task::where('id','=',$request->id)->update([
+        // //     'assigned_date'     => $request->ADate,
+                'user_id'       => $employee[0]->id
             
-        ]);
+         ]);
         
 
        
@@ -285,7 +280,7 @@ class HomeController extends Controller
         foreach ($ReportTasks as $ReportTask) {
             if (strcmp($ReportTask->status, 'Delivered') !== 0 && $ReportTask->id == $request->id) {
                 $report = new Report();
-                $report->projectname = $ReportTask->projectname;
+                $report->projectname = $ReportTask->priority;
                 $report->todo = $ReportTask->todo;
                 $report->type = $ReportTask->type;
                 $report->deadline = $ReportTask->deadline;

@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @if (Auth::user()->is_admin !==1)
                     <p>You are not authorized to access this page.</p>
-                @else
+                    @else
                     <form method="POST" action="{{ route('register.user') }}">
                         @csrf
 

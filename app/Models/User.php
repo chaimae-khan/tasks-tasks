@@ -91,6 +91,10 @@ class User extends Authenticatable
     //         ->logOnlyDirty()
     //         ->dontSubmitEmptyLogs();
     // }
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
    
      }
 

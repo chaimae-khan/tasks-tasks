@@ -72,12 +72,14 @@
                   <tr>
                     <th scope="col">Priority</th>
                     <th scope="col">Project</th>
+                    <th scope="col">name</th>
                     <th scope="col">To-Do</th>      
-                    <th scope="col">Employee</th>
+                    {{-- <th scope="col">Employee</th> --}}
                     <th scope="col">Type</th>
                     <th scope="col">Status</th>
                     <th scope="col">Deadline</th>
                     <th scope="col">Assigned Date</th>
+                    {{-- <th scope="col">Assigned Date</th> --}}
                     <th scope="col">Action</th>
                     {{-- <th scope="col"></th> --}}
                   </tr>
@@ -89,24 +91,27 @@
                         {{-- <td>{{$task->id}}</td> --}}
                       
                         <td class="
-                        @if ($task->projectname === 'low')
+                        @if ($task->priority === 'low')
                             low-priority
-                        @elseif ($task->projectname === 'not critical')
+                        @elseif ($task->priority === 'not critical')
                             not-critical-priority
-                        @elseif ($task->projectname === 'normal')
+                        @elseif ($task->priority === 'normal')
                             normal-priority
-                        @elseif ($task->projectname === 'uregent')
+                        @elseif ($task->priority === 'uregent')
                             urgent-priority
-                        @endif">{{ $task->projectname }}</td>
+                        @endif">{{ $task->priority }}</td>
                        
                         <th>{{ $task->name_project }}</th>
+                        <th>{{ $task->name}}</th>
                         <td>{{ $task->todo }}</td>
 
-                        <td>{{ $task->name }}</td>
+                        {{-- <td>{{ $task->name }}</td> --}}
                         <td>{{ $task->type }}</td>
-                        <td>{{ $task->status }}</td>
+                        <td>{{$task->status}}</td>
+                        {{-- <td>{{ $task->status }}</td> --}}
                         <td>{{ $task->deadline }}</td>
-                        <td>{{ $task->assigned_date }}</td>
+                        {{-- <td>{{ $task->assigned_date }}</td> --}}
+                        <td>{{ $task->assignedDate }}</td>
                         <td class="project-actions">
                           <div>
                             <i class="fa fa-cog" onclick="toggleButtons({{ $task->id }})"></i>
@@ -181,7 +186,7 @@
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-           @if(Auth::user()->is_admin == 1)
+                     @if(Auth::user()->is_admin == 1)
                     <div class="form-group">
                       <label class="form-control-label">To-Do</label>
                       <input class="form-control" type="text" placeholder="Enter your Client Name "id="Todo">
@@ -189,7 +194,7 @@
                     <div class="form-row mb-3">
                       <div class="col-lg col-md col-sm-12 col-12">
                         <label class="form-control-label">Priority </label>
-                         <select name="PName" id="PName" class="form-control" data-toggle="select" >
+                         <select name="priority" id="priority" class="form-control" data-toggle="select" >
                            @foreach($PriorityTask as $item)
                             <option value="{{$item}}">{{$item}}</option>
                            @endforeach
@@ -208,9 +213,9 @@
                     <div class="form-row mb-3">
                       <div class="col-lg col-md col-sm-12 col-12">
                         <label class="form-control-label">Employee </label>
-                        <select name="" id="Employe" class="form-control" data-toggle="select">
-                        @foreach($emp as $item)
-                          <option value="{{$item->name}}">{{$item->name}}</option>
+                        <select name="Employe" id="Employe" class="form-control" data-toggle="select">
+                        @foreach($user as $item)
+                          <option value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
                       </select>
                         
@@ -238,7 +243,7 @@
                     <div class="form-row mb-3">
                       <div class="col-lg col-md col-sm-12 col-12">
                         <label class="form-control-label">Priority </label>
-              <select name="PName" id="PName" class="form-control" data-toggle="select" disabled >
+                       <select name="priority" id="priority" class="form-control" data-toggle="select" disabled >
                            @foreach($PriorityTask as $item)
                             <option value="{{$item}}">{{$item}}</option>
                            @endforeach
@@ -319,10 +324,10 @@
                 
               // console.log(response.data[0].assigned_date);
               
-              $('#PName').val(response.data[0].projectname);
-              $('#Employe').val(response.data[0].name);
+              $('#priority').val(response.data[0].priority);
+              $('#Employe').val(response.data[0].user_id);
               $('#Statuts').val(response.data[0].status);
-              $('#ADate').val(response.data[0].assigned_date);
+              $('#ADate').val(response.data[0].assignedDate);
               $('#Todo').val(response.data[0].todo);
               $('#Type').val(response.data[0].type);
               $('#Deadline').val(response.data[0].deadline);
@@ -340,7 +345,7 @@
       url: "{{url('updateTask')}}",
       data: 
       {
-        PName       : $('#PName').val(),
+        priority      : $('#priority').val(),
         Employe   :$('#Employe').val(),
         Statuts   :$('#Statuts').val(),
         ADate   :$('#ADate').val(),
@@ -413,7 +418,7 @@
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
            
-            <td><select class="browser-default custom-select" name="projectname" id="projectname">
+            <td><select class="browser-default custom-select" name="priority" id="priority">
                 @foreach ($PriorityTask as $item)
                     <option value="{{ $item }}">{{ $item }}</option> 
                  @endforeach
@@ -425,16 +430,16 @@
                  @endforeach
                   
              </select></td>
-
-        </select>
-            <td><input type="text" name="todo"></td>
-            <td><select class="browser-default custom-select" name="employee" id="employee">
-                @foreach ($emp as $employee)
-                    <option value="{{ $employee->name }}">{{ $employee->name }}</option>
+            </select></td>
+            <td><select class="browser-default custom-select" name="user_name" id="user_name">
+                @foreach ( $user as $u)
+                    <option value="{{ $u->id }}">{{ $u->name }}</option>
                  @endforeach
                   
              </select></td>
-            
+
+        </select>
+            <td><input type="text" name="todo"></td>  
             <td><input type="text" name="type"></td>
 
             <td><select class="browser-default custom-select" name="status" id="status">
@@ -446,7 +451,7 @@
 
 
             <td><input type="date" name="deadline"></td>
-            <td><input type="date" name="assigned_date"></td>
+            <td><input type="date" name="assignedDate"></td>
             <td>
                 <button class="saveButton">save</button>
             </td>
@@ -455,29 +460,31 @@
 
         const saveButton = newRow.querySelector('.saveButton');
         saveButton.addEventListener('click', function() {
-            const projectname = newRow.querySelector('[name=projectname]').value;
+            const priority = newRow.querySelector('[name=priority]').value;
             const todo = newRow.querySelector('[name=todo]').value;
-            const employee = newRow.querySelector('[name=employee]').value;
+            // const employee = newRow.querySelector('[name=employee]').value;
             const type = newRow.querySelector('[name=type]').value;
             const status = newRow.querySelector('[name=status]').value;
             const deadline = newRow.querySelector('[name=deadline]').value;
             const project_name = newRow.querySelector('[name=project_name]').value;
-            console.log(project_name);
-            const assigned_date = newRow.querySelector('[name=assigned_date]').value;
+            const user_name = newRow.querySelector('[name=user_name]').value;
+            console.log(user_name);
+            const assignedDate = newRow.querySelector('[name=assignedDate]').value;
 
             $.ajax({
                 url: "{{ route('tasks.store') }}",
                 type: "POST",
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    "projectname": projectname,
+                    "priority": priority,
                     "todo": todo,
-                    "employee": employee,
-                    "projct_id" :project_name, 
+                    // "employee": employee,
+                    "projct_id" :project_name,
+                    "user_id":user_name,
                     "type": type,
                     "status": status,
                     "deadline": deadline,
-                    "assigned_date": assigned_date
+                    "assignedDate": assignedDate
                 },
                 success: function(response) {
                 

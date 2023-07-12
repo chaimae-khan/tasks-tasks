@@ -74,7 +74,7 @@ class ProjectController extends Controller
             ],
         ])
         ->event('created')
-        ->log('user created');
+        ->log('projcet  created');
         return response()->json(['success' => true]);
         
     }

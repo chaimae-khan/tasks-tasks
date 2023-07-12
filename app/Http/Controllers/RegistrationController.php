@@ -60,8 +60,7 @@ public function registerUser(Request $request)
     ]);
     $user->save();
     
-    $employee = new Employee(['name'=>$user->name]);
-    $employee->save();
+   
    
     activity()
     ->causedBy(auth()->user())

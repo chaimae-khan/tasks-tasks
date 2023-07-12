@@ -13,10 +13,7 @@ class Task extends Model
 {
     use HasFactory; 
     // use LogsActivity;
-    public function employees()
-    {
-        return $this->belongsToMany(Employee::class)->withPivot('assigned_date');
-    }
+    
 
 
     protected $fillable =[
@@ -24,6 +21,7 @@ class Task extends Model
         'todo',
         'type',
         'deadline',
+        'assignedDate',
         'status',
         'porjct_id'
     
@@ -37,6 +35,10 @@ class Task extends Model
         {
             return $this->hasOne(Report::class);
         }
+        public function user()
+    {
+        return $this->belongsTo(USER::class,'user_id');
+    }
         // public function getActivitylogOptions(): LogOptions
         // {
         //     return LogOptions::defaults()
