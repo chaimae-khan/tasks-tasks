@@ -176,7 +176,7 @@
                         </li>
                         <li>
                             <a href="/admin">
-                                <i class="fa fa-tasks"></i>Tasks</a>
+                                <i class="fa fa-thumb-tack" aria-hidden="true"></i>Tasks</a>
                         </li>
                         
                         
