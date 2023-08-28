@@ -4,14 +4,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Install Composer dependencies
-            sh 'composer install'
-            
-            // Install npm dependencies
-            sh 'npm install'
-            
-            // Build assets using npm
-            sh 'npm run build'
+           echo 'Building...'
+                sh 'composer install'
+                sh 'npm install'
+                sh 'npm run build'
+
             }
         }
         stage('Test') {
