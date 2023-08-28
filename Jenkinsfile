@@ -4,12 +4,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               sh 'echo Building..'
+               sh 'composer install'
+               sh 'npm install'
+               sh 'npm run build'
             }
         }
         stage('Test') {
             steps {
-               sh 'echo Testing..'
+               sh 'php artisan test'
             }
         }
         stage('Deploy') {
