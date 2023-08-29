@@ -15,6 +15,7 @@ pipeline {
             steps {
                  sshagent(['ssh-agent']) {
                 sh 'ls '
+                 }
             }
         }
     }
