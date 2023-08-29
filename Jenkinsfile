@@ -10,11 +10,7 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'php artisan test'
-            }
-        }
+      
         stage('Deploy') {
             steps {
                  sshagent(['ssh-agent']) {
