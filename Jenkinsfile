@@ -14,8 +14,8 @@ pipeline {
         stage('Deploy') {
             steps {
                  sshagent(['ssh-agent']) {
-                sh 'ls'
-                sh 'whoami '
+                 sh' ssh user2@192.168.217.153 "ls"'
+                
                  }
             }
         }
