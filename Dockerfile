@@ -1,7 +1,7 @@
 # Use the official Ubuntu image as the base image
 FROM ubuntu:latest
 
-# Set the DEBIAN_FRONTEND variable to noninteractive
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Update the package list and install nginx and curl
