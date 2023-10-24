@@ -1,3 +1,3 @@
 
 FROM alpine:latest
-CMD ["echo", "Hello I changed "]
+CMD ["echo", "new images "]
