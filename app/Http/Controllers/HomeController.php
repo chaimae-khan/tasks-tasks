@@ -58,7 +58,7 @@ class HomeController extends Controller
         $statutTask = ['Open','Delivred','To Do','To Test','Colosed','Cancled'];
         $PriorityTask = ['low ','not critical','normal','uregent'];
 
-        return view('admin')
+        return view('Admin')
         ->with('tasks',$tasks)
         ->with('project',$project)
         ->with('statutTask',$statutTask)

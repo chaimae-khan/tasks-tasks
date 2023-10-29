@@ -1,0 +1,141 @@
+2023/10/28 11:54:36 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:54:44 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:54:52 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:55:00 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:55:09 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:55:18 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:55:30 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:55:44 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:56:04 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:56:40 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:57:39 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:58:51 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 11:59:59 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:01:07 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:02:32 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:03:43 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:04:52 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:05:59 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:52:12 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:52:21 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:52:30 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:52:38 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:52:47 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:52:56 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:53:08 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:53:23 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:53:44 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:54:19 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:55:20 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:56:28 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:57:38 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 12:58:46 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:05:35 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:05:44 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:05:53 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:06:02 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:06:11 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:06:21 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:06:31 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:06:46 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:07:08 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:07:41 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:08:40 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:09:47 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:10:55 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:12:02 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:15:07 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:15:15 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:15:22 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:15:30 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:15:37 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:15:46 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:15:57 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:16:11 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:16:32 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:17:05 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:18:08 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:19:25 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:20:36 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:21:46 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:22:53 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:23:59 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:25:05 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:26:11 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:27:17 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:28:23 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:29:30 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:30:36 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:31:42 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:32:48 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:33:54 [emerg] 1#1: host not found in upstream "app" in /etc/nginx/conf.d/app.conf:10
+2023/10/28 13:37:08 [notice] 1#1: using the "epoll" event method
+2023/10/28 13:37:08 [notice] 1#1: nginx/1.25.3
+2023/10/28 13:37:08 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r10) 
+2023/10/28 13:37:08 [notice] 1#1: OS: Linux 6.2.0-35-generic
+2023/10/28 13:37:08 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/10/28 13:37:08 [notice] 1#1: start worker processes
+2023/10/28 13:37:08 [notice] 1#1: start worker process 20
+2023/10/28 13:44:18 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/10/28 13:44:18 [notice] 20#20: gracefully shutting down
+2023/10/28 13:44:18 [notice] 20#20: exiting
+2023/10/28 13:44:18 [notice] 20#20: exit
+2023/10/28 13:44:18 [notice] 1#1: signal 17 (SIGCHLD) received from 20
+2023/10/28 13:44:18 [notice] 1#1: worker process 20 exited with code 0
+2023/10/28 13:44:18 [notice] 1#1: exit
+2023/10/28 13:46:31 [notice] 1#1: using the "epoll" event method
+2023/10/28 13:46:31 [notice] 1#1: nginx/1.25.3
+2023/10/28 13:46:31 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r10) 
+2023/10/28 13:46:31 [notice] 1#1: OS: Linux 6.2.0-35-generic
+2023/10/28 13:46:31 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/10/28 13:46:31 [notice] 1#1: start worker processes
+2023/10/28 13:46:31 [notice] 1#1: start worker process 20
+2023/10/28 13:48:01 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/10/28 13:48:01 [notice] 20#20: gracefully shutting down
+2023/10/28 13:48:01 [notice] 20#20: exiting
+2023/10/28 13:48:01 [notice] 20#20: exit
+2023/10/28 13:48:01 [notice] 1#1: signal 17 (SIGCHLD) received from 20
+2023/10/28 13:48:01 [notice] 1#1: worker process 20 exited with code 0
+2023/10/28 13:48:01 [notice] 1#1: exit
+2023/10/28 13:50:01 [notice] 1#1: using the "epoll" event method
+2023/10/28 13:50:01 [notice] 1#1: nginx/1.25.3
+2023/10/28 13:50:01 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r10) 
+2023/10/28 13:50:01 [notice] 1#1: OS: Linux 6.2.0-35-generic
+2023/10/28 13:50:01 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/10/28 13:50:01 [notice] 1#1: start worker processes
+2023/10/28 13:50:01 [notice] 1#1: start worker process 20
+2023/10/28 13:51:35 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/10/28 13:51:35 [notice] 20#20: gracefully shutting down
+2023/10/28 13:51:35 [notice] 20#20: exiting
+2023/10/28 13:51:35 [notice] 20#20: exit
+2023/10/28 13:51:35 [notice] 1#1: signal 17 (SIGCHLD) received from 20
+2023/10/28 13:51:35 [notice] 1#1: worker process 20 exited with code 0
+2023/10/28 13:51:35 [notice] 1#1: exit
+2023/10/28 13:57:03 [notice] 1#1: using the "epoll" event method
+2023/10/28 13:57:03 [notice] 1#1: nginx/1.25.3
+2023/10/28 13:57:03 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r10) 
+2023/10/28 13:57:03 [notice] 1#1: OS: Linux 6.2.0-35-generic
+2023/10/28 13:57:03 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/10/28 13:57:03 [notice] 1#1: start worker processes
+2023/10/28 13:57:03 [notice] 1#1: start worker process 20
+2023/10/28 14:09:17 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/10/28 14:09:17 [notice] 20#20: gracefully shutting down
+2023/10/28 14:09:17 [notice] 20#20: exiting
+2023/10/28 14:09:17 [notice] 20#20: exit
+2023/10/28 14:09:17 [notice] 1#1: signal 17 (SIGCHLD) received from 20
+2023/10/28 14:09:17 [notice] 1#1: worker process 20 exited with code 0
+2023/10/28 14:09:17 [notice] 1#1: exit
+2023/10/28 14:18:14 [notice] 1#1: using the "epoll" event method
+2023/10/28 14:18:14 [notice] 1#1: nginx/1.25.3
+2023/10/28 14:18:14 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r10) 
+2023/10/28 14:18:14 [notice] 1#1: OS: Linux 6.2.0-35-generic
+2023/10/28 14:18:14 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/10/28 14:18:14 [notice] 1#1: start worker processes
+2023/10/28 14:18:14 [notice] 1#1: start worker process 20
+2023/10/29 10:44:19 [notice] 1#1: using the "epoll" event method
+2023/10/29 10:44:19 [notice] 1#1: nginx/1.25.3
+2023/10/29 10:44:19 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r10) 
+2023/10/29 10:44:19 [notice] 1#1: OS: Linux 6.2.0-35-generic
+2023/10/29 10:44:19 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/10/29 10:44:19 [notice] 1#1: start worker processes
+2023/10/29 10:44:19 [notice] 1#1: start worker process 20
