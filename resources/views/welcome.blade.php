@@ -65,7 +65,7 @@
                             <hr class="divider" />
                         </div>
                         <div class="col-lg-8 align-self-baseline">
-                            <p class="text-white-75 mb-5">At Gebs,,, we strive to provide you with an exceptional task management experience. Our platform is designed to help you stay organized, increase productivity, and collaborate seamlessly with your team.</p>
+                            <p class="text-white-75 mb-5">wa hassan</p>
                             {{-- <a class="nav-link btn btn-primary btn-xl" href="{{ route('login') }}" >Get log in </a> --}}
                         </div>
                     </div>
