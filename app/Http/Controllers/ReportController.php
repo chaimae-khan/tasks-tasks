@@ -17,7 +17,9 @@ class ReportController extends Controller
     public function index(){
 
     $is_admin = Auth::user()->is_admin;
-    $Reports = Report::latest()->paginate(5);
+   /*  $Reports = Report::latest()->paginate(5); */
+
+    $Reports  = DB::select('select *,date(deadline) as dateDeadline from reports');
 
     return view('Reports',compact('Reports'))
         ->with('i', (request()->input('page', 1) - 1) * 5);

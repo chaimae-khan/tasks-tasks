@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">   
                 <div class="card">
-                    <div class="card-header">users</div>
+                    <div class="card-header">Rapport</div>
                     @if (Auth::user()->is_admin !==1)
                       <div class="card-body">
                               <p>You are not authorized to access this page.</p>
@@ -35,11 +35,12 @@
                         </thead>
                         <tbody>
                             @foreach ($Reports as $report)
+                           
                                 <tr>
                                     <td>{{ $report->projectname }}</td>
                                     <td>{{ $report->todo }}</td>
                                     <td>{{ $report->type }}</td>
-                                    <td>{{ $report->deadline }}</td>
+                                    <td>{{ $report->dateDeadline }}</td>
                                     <td>{{ $report->status }}</td>
                                 </tr>
                             @endforeach

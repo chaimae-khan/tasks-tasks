@@ -40,31 +40,39 @@ class HomeController extends Controller
     { 
         
         $is_admin = Auth::user()->is_admin;
+        $user_id  = Auth::user()->id;
        
        
-        
         $tasks = DB::table('tasks')
         ->join('projectts','projectts.id','=','tasks.projct_id')
         ->join('users','users.id','=','tasks.user_id')
         ->select('tasks.*','projectts.name_project','users.name')
         ->where('tasks.operation','=','dis')
+        ->where(function($query) use ($is_admin,$user_id){
+            if($is_admin == 0)
+            {
+                $query->where('tasks.user_id',$user_id);
+            }
+        })
         ->whereNotIn('tasks.id',function($query){
             $query->select('task_id')->from('reports');})
         ->get();
+        
      
 
         $user = User::all();
         $project= Projectt::all();
         $statutTask = ['Open','Delivred','To Do','To Test','Colosed','Cancled'];
         $PriorityTask = ['low ','not critical','normal','uregent'];
-
+        $emp = DB::select('select * from users');//samya table
         return view('Admin')
         ->with('tasks',$tasks)
         ->with('project',$project)
         ->with('statutTask',$statutTask)
         ->with('PriorityTask',$PriorityTask)
         ->with('is_admin',$is_admin)
-        ->with('user',$user);
+        ->with('user',$user)
+        ->with('emp',$emp);
 
     }
     // public function getEmployees(Request $request)
@@ -213,7 +221,7 @@ class HomeController extends Controller
 
     public function updateTask(Request $request)
     {
-        
+       
         $task = Task :: findOrFail($request->id);
         $employee_task = DB::select("select user_id from tasks where id =?",[$request->id]);
         $employee = User ::findOrFail($employee_task[0]->user_id);

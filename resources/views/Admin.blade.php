@@ -3,7 +3,13 @@
 @section('content')
     
 <style>
-
+  select
+  {
+    word-wrap: normal;
+    padding: 10px 0px;
+    border-color: gray;
+    text-align: center;
+  }
 .low-priority {
   background-color: #CFE2F3;
 }
@@ -86,11 +92,12 @@
                 </thead>
         <tbody>
             @foreach ($tasks as $task)
-                
+                    
+
                     <tr>
                         {{-- <td>{{$task->id}}</td> --}}
                       
-                        <td class="
+                       <td class="
                         @if ($task->priority === 'low')
                             low-priority
                         @elseif ($task->priority === 'not critical')
@@ -99,7 +106,8 @@
                             normal-priority
                         @elseif ($task->priority === 'uregent')
                             urgent-priority
-                        @endif">{{ $task->priority }}</td>
+                        @endif">{{ $task->priority }}</td> 
+                        
                        
                         <th>{{ $task->name_project }}</th>
                         <th>{{ $task->name}}</th>
@@ -194,7 +202,7 @@
                     <div class="form-row mb-3">
                       <div class="col-lg col-md col-sm-12 col-12">
                         <label class="form-control-label">Priority </label>
-                         <select name="priority" id="priority" class="form-control" data-toggle="select" >
+                         <select name="priority" id="priority" class="form-select" data-toggle="select" >
                            @foreach($PriorityTask as $item)
                             <option value="{{$item}}">{{$item}}</option>
                            @endforeach
@@ -243,7 +251,7 @@
                     <div class="form-row mb-3">
                       <div class="col-lg col-md col-sm-12 col-12">
                         <label class="form-control-label">Priority </label>
-                       <select name="priority" id="priority" class="form-control" data-toggle="select" disabled >
+                       <select name="priority" id="priority" class="form-control" data-toggle="select"  >
                            @foreach($PriorityTask as $item)
                             <option value="{{$item}}">{{$item}}</option>
                            @endforeach
@@ -309,6 +317,7 @@
       
 <script>
   var idtaskUpdate = 0;
+  var priorityTest ='';
   $('#tableTasks tbody').on('click','.btnupdate',function(){
     idtaskUpdate =  $(this).attr('value');
       $.ajax({
@@ -323,7 +332,7 @@
               {
                 
               // console.log(response.data[0].assigned_date);
-              
+              priorityTest = response.data[0].priority;
               $('#priority').val(response.data[0].priority);
               $('#Employe').val(response.data[0].user_id);
               $('#Statuts').val(response.data[0].status);
@@ -337,7 +346,7 @@
       });
       
   });
-
+  
   $('#btnUpdateTask').on('click',function(){
    
     $.ajax({
@@ -345,7 +354,7 @@
       url: "{{url('updateTask')}}",
       data: 
       {
-        priority      : $('#priority').val(),
+        priority      : /* $('#priority').val() */priorityTest,
         Employe   :$('#Employe').val(),
         Statuts   :$('#Statuts').val(),
         ADate   :$('#ADate').val(),
@@ -415,10 +424,11 @@
          alert("THIS ACTION IS UNAUTHORIZED.");
         return 0;
       }
+     
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
            
-            <td><select class="browser-default custom-select" name="priority" id="priority">
+            <td><select class="form-select" name="priority" id="priority">
                 @foreach ($PriorityTask as $item)
                     <option value="{{ $item }}">{{ $item }}</option> 
                  @endforeach
