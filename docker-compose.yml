@@ -9,7 +9,7 @@ services:
         uid: 1000
       context: .
       dockerfile: Dockerfile
-    image: dockeruser/php
+    image: laravel-app
     container_name: app
     restart: unless-stopped
     tty: true
