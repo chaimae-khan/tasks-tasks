@@ -6,7 +6,14 @@
   select
   {
     word-wrap: normal;
-    padding: 10px 0px;
+    padding: 9px 12px;
+    border-color: gray;
+    text-align: center;
+  }
+  label-t
+  {
+    word-wrap: normal;
+    padding: 14px 12px;
     border-color: gray;
     text-align: center;
   }
@@ -209,13 +216,15 @@
                           </select>
                         </select>
                       </div>
+                      <div class="form-row mb-3">
                       <div class="col-lg col-md col-sm-12 col-12">
                         <label class="form-control-label">status </label>
-                         <select name="Statuts" id="Statuts" class="form-control" data-toggle="select" >
+                         <select name="Statuts" id="Statuts" class="form-select" data-toggle="select" >
                         @foreach($statutTask as $item)
                           <option value="{{$item}}">{{$item}}</option>
                         @endforeach
                       </select>
+                      </div>
                       </div>
                     </div>
                     <div class="form-row mb-3">
@@ -434,14 +443,14 @@
                  @endforeach
                   
              </select></td>
-            <td><select class="browser-default custom-select" name="project_name" id="project_name">
+            <td><select class="form-select" name="project_name" id="project_name">
                 @foreach ( $project as $p)
                     <option value="{{ $p->id }}">{{ $p->name_project }}</option>
                  @endforeach
                   
              </select></td>
             </select></td>
-            <td><select class="browser-default custom-select" name="user_name" id="user_name">
+            <td><select class="form-select" name="user_name" id="user_name">
                 @foreach ( $user as $u)
                     <option value="{{ $u->id }}">{{ $u->name }}</option>
                  @endforeach
@@ -449,10 +458,10 @@
              </select></td>
 
         </select>
-            <td><input type="text" name="todo"></td>  
+            <td><input class="form-select" type="text" name="todo"></td>  
             <td><input type="text" name="type"></td>
 
-            <td><select class="browser-default custom-select" name="status" id="status">
+            <td><select class="form-select" name="status" id="status">
                 @foreach ($statutTask as $item)
                     <option value="{{ $item }}">{{ $item }}</option> 
                  @endforeach
