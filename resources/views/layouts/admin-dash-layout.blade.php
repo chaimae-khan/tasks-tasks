@@ -48,7 +48,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/logo.png" alt="CoolAdmin" />
+                            <img src="images/icon/logo1.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -150,7 +150,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo2.png" alt="Cool Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -204,10 +204,10 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <!-- <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
-                                </button>
+                                </button> -->
                             </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
@@ -220,19 +220,22 @@
                                             <div class="notifi__title">
                                                 <p>You have {{Auth::user()->unreadNotifications->count()}} Notifications</p>
                                             </div>
-											 
+                                            @foreach(Auth::user()->unreadNotifications as $notification)
                                             <div class="notifi__item">
+                                            
                                                 <div class="bg-c1 img-cir img-40">
                                                     <i class="zmdi zmdi-email-open"></i>
                                                 </div>
-												@foreach(Auth::user()->unreadNotifications as $notification)
+												
                                                 <div class="content">
                                                     <p>{{$notification->data['todo']}}</p>
                                                     <span class="date">{{$notification->created_at}}</span>
                                                 </div>
-												@endforeach
-        
+												
+                   
                                             </div>
+                                            </br>
+                                            @endforeach
                                             {{-- <div class="notifi__item">
                                                 <div class="bg-c2 img-cir img-40">
                                                     <i class="zmdi zmdi-account-box"></i>

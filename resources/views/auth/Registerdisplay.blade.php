@@ -25,9 +25,8 @@
                     <th> Name</th>
                     <th> email </th>
                     <th>phone_number </th>
-                    <th>picture  </th>
+                    <th>pic-code </th>
                     <th>status</th>
-                    <th>Status</th>
                     <th>skills</th>
                     <th>Action</th>
                     
@@ -44,17 +43,16 @@
         
                                 <td>{{ $user->picture  }}</td>
                                 <td>{{ $user->status }}</td>
-                                <td>{{ $user->status }}</td>
                                 <td>{{ $user->skills }}</td>
                                 <td class="project-actions ">
                                     {{-- <a class="btn  btn-primary  btn-sm iconDispalyhistory "   value="{{$user->id}}" id='' > <i class="fa fa-eye">  </i> View</a> --}}
                                     
-                                    <a class="btn btn-info btn-sm btnupdate" id="btnupdate" value={{$user->id}}>  <i class="fas fa-pencil-alt">  </i> Edit </a>
+                                    <a class="btn btn-info btn-sm btnupdate" id="btnupdate" value="{{$user->id}}"  style="color: white;" >  <i class="fas fa-pencil-alt"></i> Edit </a>
                                     <form action="{{ route('register.destroy', $user->id) }}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Are you sure you want to delete this user?')" >Delete</button>
+                                            onclick="return confirm('Are you sure you want to delete this user?')" ><i class="fa fa-trash"></i> Delete</button>
                                     </form>
                                 
                         </td> 

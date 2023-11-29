@@ -2,10 +2,20 @@
 
 @section('content')
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
-<div>
+<div class="col d-flex align-items-center justify-content-between justify-content-md-end">
+                <div class="actions d-inline-block">
+                  <div class="col-auto d-flex align-items-center justify-content-between justify-content-md-end">
+                   <a href="#" class="btn btn-sm btn-primary btn-icon rounded-pill" data-toggle="modal" data-target="#add-project"  id="addProjectButton">
+                   <span class="btn-inner--icon" >Add A new project <i class="fas fa-plus ml-2"></i></span>
+                   </a>
+                  </div>
+                </div>
+               
+              </div>
+<!-- <div>
         
     <button class="w3-button w3-right"  id="addProjectButton">Add new </button>
-  </div>
+  </div> -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -39,9 +49,11 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure you want to delete this project?')">Delete</button>
+                                                onclick="return confirm('Are you sure you want to delete this project?')"><i class="fa fa-trash"></i> Delete</button>
                                         </form>
-                                        <a  class="btn btn-primary btn-sm" id="btnupdate"  value="{{$project->id}}">Edit</a>
+                                        
+                                        <a  class="btn btn-info btn-sm btnupdate" id="btnupdate"  value="{{$project->id}}" style="color: white;"><i class="fas fa-pencil-alt"></i>  Edit</a>
+                                        
                                            
                                     </td>
                                 </tr>

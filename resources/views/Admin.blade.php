@@ -182,7 +182,7 @@
               <div>
                 <h5 class="modal-title" id="exampleModalLabel">Update task</h5>
                 <p class="text-muted mb-0" style="max-width: 466px;">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.rro cupiditate tempora saepe. Quam, pariatur.
+                Here, you can update the task
                 </p>
               </div>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -260,7 +260,7 @@
                     <div class="form-row mb-3">
                       <div class="col-lg col-md col-sm-12 col-12">
                         <label class="form-control-label">Priority </label>
-                       <select name="priority" id="priority" class="form-control" data-toggle="select"  >
+                       <select name="priority" id="priority" class="form-control" data-toggle="select" disabled  >
                            @foreach($PriorityTask as $item)
                             <option value="{{$item}}">{{$item}}</option>
                            @endforeach

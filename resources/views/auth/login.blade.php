@@ -10,7 +10,7 @@
                 <div class="login-content">
                     <div class="login-logo">
                         <a href="#">
-                            <img src="images/icon/logo.png" alt="CoolAdmin">
+                            <img src="images/icon/logo3.png" alt="CoolAdmin">
                         </a>
                     </div>
          <form method="POST" class="signin-form" action="{{ route('login') }}">
