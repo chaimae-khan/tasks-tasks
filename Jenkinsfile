@@ -11,7 +11,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'php artisan serve'
+                sh 'php artisan test'
+                sh 'php artisan serve'
             }
         }
         stage('Deploy') {
