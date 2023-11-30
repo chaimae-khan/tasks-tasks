@@ -214,8 +214,8 @@
                                     
                                   
                                     <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-notifications"></i>
-                                        <span class="quantity">{{Auth::user()->unreadNotifications->count()}}</span>
+                                        <i class="zmdi zmdi-notifications" onclick="markNotificationsAsRead();"></i>
+                                        <span class="quantity" id="notification-count" >{{Auth::user()->unreadNotifications->count()}}</span>
                                         <div class="notifi-dropdown js-dropdown">
                                             <div class="notifi__title">
                                                 <p>You have {{Auth::user()->unreadNotifications->count()}} Notifications</p>
@@ -318,6 +318,12 @@
                         
 
     </div>
+    <script>
+function markNotificationsAsRead() {
+    // Update the notification count
+    document.getElementById('notification-count').textContent = '0';
+}
+</script>
 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
